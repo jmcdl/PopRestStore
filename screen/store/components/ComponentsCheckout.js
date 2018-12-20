@@ -379,7 +379,7 @@ storeComps.SuccessCheckOut = {
                 .then(function (data) { this.orderList = data; }.bind(this));
         },
         formatDate: function(date) {
-            return moment(date).format('Do MMM, YY');
+            return moment(date).format('MMM Do, YYYY');
         }
     },
     mounted: function() {

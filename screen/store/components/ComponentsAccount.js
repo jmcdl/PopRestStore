@@ -541,7 +541,7 @@ storeComps.CustomerOrderPage = {
             return  newDATE;
         },
         formatDate: function(dateArg) {
-            return moment(dateArg).format('Do MMM, YY');
+            return moment(dateArg).format('MMM Do, YYYY');
         }
     },
     mounted: function() { 
@@ -589,7 +589,7 @@ storeComps.CustomerOrdersPage = {
             }
         },
         formatDate: function(date) {
-            return moment(date).format('Do MMM, YY');
+            return moment(date).format('MMM Do, YYYY');
         }
     },
     mounted: function() { 
