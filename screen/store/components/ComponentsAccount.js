@@ -20,7 +20,7 @@ storeComps.LoginPage = {
             }
             LoginService.login(this.user, this.axiosConfig).then(function (data) {
                 if(data.forcePasswordChange == true) { 
-                    this.showModal('modal'); 
+                    this.showModal('changePasswordModal'); 
                 } else { 
                     this.$root.apiKey = data.apiKey; 
                     if(preLoginRoute.name == null || preLoginRoute.name == "createaccount") {
@@ -235,7 +235,7 @@ storeComps.AccountPage = {
             CustomerService.addShippingAddress(this.shippingAddress,this.axiosConfig).then(function (data) {
                 this.shippingAddress = {};
                 this.getCustomerAddress();
-                this.hideModal("modal1");
+                this.hideModal("addressModal");
                 this.responseMessage = "";
             }.bind(this));
         },
@@ -276,7 +276,7 @@ storeComps.AccountPage = {
             if (this.isUpdate) { this.paymentMethod.cardNumber = ""; }
 
             CustomerService.addPaymentMethod(this.paymentMethod,this.axiosConfig).then(function (data) {
-                this.hideModal("modal2");
+                this.hideModal("creditCardModal");
                 this.paymentMethod = {};
                 this.getCustomerPaymentMethods();
                 this.responseMessage = "";
@@ -293,9 +293,7 @@ storeComps.AccountPage = {
             if(this.customerInfo.username == null || this.customerInfo.username.trim() === ""
             || this.customerInfo.firstName == null || this.customerInfo.firstName.trim() === ""
             || this.customerInfo.lastName == null || this.customerInfo.lastName.trim() === ""
-            || this.customerInfo.emailAddress == null || this.customerInfo.emailAddress.trim() === ""
-            || this.customerInfo.locale == null || this.customerInfo.locale.trim() === ""
-            || this.customerInfo.timeZone == null || this.customerInfo.timeZone.trim() === "") {
+            || this.customerInfo.emailAddress == null || this.customerInfo.emailAddress.trim() === "") {
                 this.message.state = 2;
                 this.message.message = "Verify the required fields";
                 return;
@@ -351,13 +349,13 @@ storeComps.AccountPage = {
         deletePaymentMethod: function(paymentMethodId) {
             CustomerService.deletePaymentMethod(paymentMethodId,this.axiosConfig).then(function (data) {
                 this.getCustomerPaymentMethods();
-                this.hideModal("modal5");
+                this.hideModal("deletePaymentMethodModal");
             }.bind(this));
         },
         deleteShippingAddress: function(contactMechId,contactMechPurposeId) {
             CustomerService.deleteShippingAddress(contactMechId,contactMechPurposeId, this.axiosConfig).then(function (data) {
                 this.getCustomerAddress();
-                this.hideModal("modal4");
+                this.hideModal("deleteAddressModal");
             }.bind(this));
         },
         getCountries: function() { GeoService.getCountries().then(function (data) { this.countriesList = data.geoList; }.bind(this)); },

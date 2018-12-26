@@ -39,49 +39,33 @@
                 <p class="order-text-color account-subtitle mt-3">Profile</p>
                 <hr class="account-hr">
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label modal-text">Username*</label>
+                    <label for="username" class="col-sm-2 col-form-label modal-text">Username</label>
                     <div class="col-sm-6">
                         <input class="form-control" id="username" type="text" v-model="customerInfo.username" required/>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="firstname" class="col-sm-2 col-form-label modal-text">First Name*</label>
+                    <label for="firstname" class="col-sm-2 col-form-label modal-text">First Name</label>
                     <div class="col-sm-6">
                         <input class="form-control" id="firstname" type="text" v-model="customerInfo.firstName" required/>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="middleName" class="col-sm-2 col-form-label modal-text">Middle Name</label>
-                    <div class="col-sm-6">
-                        <input class="form-control" id="middleName" type="text" v-model="customerInfo.middleName" required/>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="lastName" class="col-sm-2 col-form-label modal-text">Last Name*</label>
+                    <label for="lastName" class="col-sm-2 col-form-label modal-text">Last Name</label>
                     <div class="col-sm-6">
                         <input class="form-control" id="lastName" type="text" v-model="customerInfo.lastName" required/>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="emailAddress" class="col-sm-2 col-form-label modal-text">Contact Email*</label>
+                    <label for="emailAddress" class="col-sm-2 col-form-label modal-text">Contact Email</label>
                     <div class="col-sm-6">
                         <input class="form-control" id="emailAddress" type="email" v-model="customerInfo.emailAddress" required/>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label modal-text">Locale*</label>
+                    <label for="phone" class="col-sm-2 col-form-label modal-text">Phone</label>
                     <div class="col-sm-6">
-                        <select v-model="customerInfo.locale" class="form-control">
-                            <option v-for="locale in localeList" :value="locale.locale">{{locale.name}}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label modal-text">Time Zone*</label>
-                    <div class="col-sm-6">
-                        <select v-model="customerInfo.timeZone" class="form-control">
-                            <option v-for="time in timeZoneList" :value="time">{{time}}</option>
-                        </select>
+                        <input class="form-control" id="contactNumber" type="text" v-model="customerInfo.contactNumber" required/>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -89,7 +73,7 @@
                         <button @click="updateCustomerInfo" class="btn btn-continue account-btn">Save</button>
                     </div>
                     <div class="col-sm-6 offset-sm-2 mt-3">
-                        <button data-toggle="modal" data-target="#modal" class="btn btn-continue account-btn">Change Password</button>
+                        <button data-toggle="modal" data-target="#changePasswordModal" class="btn btn-continue account-btn">Change Password</button>
                     </div>
                 </div>
                 <p class="order-text-color account-subtitle mt-5" id="delivery" ref="delivery">Delivery Address</p>
@@ -116,12 +100,12 @@
                                 </span>
                             </label>
                             <span class="span-link-container mt-1">
-                                <span data-toggle="modal" data-target="#modal1" 
+                                <span data-toggle="modal" data-target="#addressModal" 
                                     @click="selectAddress(address),isUpdate = true" class="span-link">
                                     Update
                                 </span>
                                 <span>|</span>
-                                <span data-toggle="modal" data-target="#modal4" @click="selectAddress(address)" 
+                                <span data-toggle="modal" data-target="#deleteAddressModal" @click="selectAddress(address)" 
                                     class="span-link">
                                     Delete
                                 </span>
@@ -131,7 +115,7 @@
                 </div>
                 <br>
                 <div class="row">
-                    <button data-toggle="modal" data-target="#modal1" 
+                    <button data-toggle="modal" data-target="#addressModal" 
                         class="btn btn-continue col col-lg-6 account-btn" @click="resetData()">
                         Add an Address
                     </button>
@@ -153,12 +137,12 @@
                             </label>
                             <span class="span-link-container mt-1">
                                 <span @click="selectPaymentMethod(item),isUpdate = true" 
-                                    data-toggle="modal" data-target="#modal2" class="span-link">
+                                    data-toggle="modal" data-target="#creditCardModal" class="span-link">
                                     Update
                                 </span>
                                 <span>|</span>
                                 <span @click="selectPaymentMethod(item)" data-toggle="modal" 
-                                    data-target="#modal5" class="span-link">
+                                    data-target="#deletePaymentMethodModal" class="span-link">
                                     Delete
                                 </span>
                             </span>
@@ -167,14 +151,14 @@
                 </div>
                 <br>
                 <div class="row">
-                    <button @click="resetData()" data-toggle="modal" data-target="#modal2" 
+                    <button @click="resetData()" data-toggle="modal" data-target="#creditCardModal" 
                         class="btn btn-continue col col-lg-6 account-btn">
                         Add a Credit Card
                     </button>
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal"> <!-- change password -->
+        <div class="modal fade" id="changePasswordModal"> <!-- change password -->
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -217,7 +201,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal1">
+        <div class="modal fade" id="addressModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
@@ -325,7 +309,7 @@
                                 <span v-if="isUpdate">Update Address</span>
                                 <span v-else>Add Address</span>
                             </button>
-                            <a @click="hideModal('modal1')" class="btn btn-link text-add col col-sm-9">
+                            <a @click="hideModal('addressModal')" class="btn btn-link text-add col col-sm-9">
                                 Cancel
                             </a>
                         </div>
@@ -333,7 +317,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal2">
+        <div class="modal fade" id="creditCardModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -513,7 +497,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal4">
+        <div class="modal fade" id="deleteAddressModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -535,7 +519,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal5">
+        <div class="modal fade" id="deletePaymentMethodModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
