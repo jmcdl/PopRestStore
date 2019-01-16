@@ -220,18 +220,17 @@ storeComps.AccountPage = {
                 this.stateErrorMessage = "Please enter a state";
                 error = true;
             } 
-            if (this.shippingAddress.postalCode == null || this.shippingAddress.postalCode.trim() === "") {
-                this.postalCodeErrorMessage = "Please enter a postcode";
+            if ( !(/^\d{5}$/.test(this.shippingAddress.postalCode)) ) {
+                this.postalCodeErrorMessage = "Please enter a valid 5 digit ZIP code";
                 error = true;
-            } 
-            if (this.shippingAddress.contactNumber == null || this.shippingAddress.contactNumber.trim() === "") {
-                this.contactNumberErrorMessage = "Please enter a phone number";
+                } 
+            if ( !(/^\d\d[-\. \d]*\d\d$/.test(this.shippingAddress.contactNumber)) ) {
+                this.contactNumberErrorMessage = "Please enter a valid phone number";
                 error = true;
             }
             if(error){
                 return;
             }
-
             CustomerService.addShippingAddress(this.shippingAddress,this.axiosConfig).then(function (data) {
                 this.shippingAddress = {};
                 this.getCustomerAddress();
